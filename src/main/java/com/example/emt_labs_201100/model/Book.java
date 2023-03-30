@@ -21,5 +21,13 @@ public class Book {
 
     private Integer availableCopies;
 
+    public Book() {
+    }
 
+    public Book(String name, Category category, Author author, Integer availableCopies) {
+        this.name = name;
+        this.category = category;
+        this.author = author;
+        this.availableCopies = availableCopies;
+    }
 }

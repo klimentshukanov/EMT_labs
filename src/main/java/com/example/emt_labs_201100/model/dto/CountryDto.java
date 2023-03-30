@@ -1,25 +1,20 @@
-package com.example.emt_labs_201100.model;
+package com.example.emt_labs_201100.model.dto;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data
-@Entity
-public class Country {
+public class CountryDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String name;
     private String continent;
 
-    public Country() {
+    public CountryDto() {
     }
 
-    public Country(String name, String continent) {
+    public CountryDto(String name, String continent) {
         this.name = name;
         this.continent = continent;
     }
