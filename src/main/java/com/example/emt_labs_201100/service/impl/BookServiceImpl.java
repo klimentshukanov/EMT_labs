@@ -6,6 +6,7 @@ import com.example.emt_labs_201100.model.exceptions.BookNotFoundException;
 import com.example.emt_labs_201100.model.exceptions.CannotRentBookException;
 import com.example.emt_labs_201100.repository.BookRepository;
 import com.example.emt_labs_201100.service.BookService;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,11 +34,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Optional<Book> edit(Long id, BookDto bookDto) {
-        Book book=bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException());
+        Book book=bookRepository.findById(id).orElseThrow(BookNotFoundException::new);
         book.setAuthor(bookDto.getAuthor());
         book.setAvailableCopies(bookDto.getAvailableCopies());
         book.setCategory(bookDto.getCategory());
-        bookDto.setName(bookDto.getName());
+        book.setName(bookDto.getName());
         return Optional.of(bookRepository.save(book));
     }
 
@@ -53,7 +54,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Optional<Book> rentBook(Long id) {
-        Book book=bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException());
+        Book book=bookRepository.findById(id).orElseThrow(BookNotFoundException::new);
+
         if(book.getAvailableCopies()==0)
         {
             throw new CannotRentBookException();
