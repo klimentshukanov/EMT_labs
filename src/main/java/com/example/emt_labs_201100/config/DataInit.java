@@ -37,7 +37,7 @@ public class DataInit {
             countryService.save(new CountryDto("Country"+i, "Europe"));
             authorService.save(new AuthorDto("Name"+i, "LastName"+i, countryService.findById((long) i).orElse(null)));
             bookService.save(new BookDto("Book"+i, Arrays.stream(Category.values()).toList().get((int) ((Math.random() * 6) )),
-                    authorService.findById((long) i).orElse(null), 5));
+                    (long) i, 5));
         }
     }
 }
