@@ -1,7 +1,7 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom/dist';
 
-const BooksAdd = (props) => {
+const BookAdd = (props) => {
 
     const navigate = useNavigate();
     const [formData, updateFormData] = React.useState({
@@ -82,4 +82,4 @@ const BooksAdd = (props) => {
     )
 }
 
-export default BooksAdd;
+export default BookAdd;

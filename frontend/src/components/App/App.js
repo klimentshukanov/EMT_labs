@@ -1,14 +1,14 @@
-import logo from '../../logo.svg';
 import './App.css';
 import React, {Component} from "react";
 import Books from "../Books/bookList/books"
 import Header from "../Header/header"
 import Categories from "../Categories/categories"
-import BooksAdd from "../Books/booksAdd/booksAdd"
+import BookAdd from "../Books/bookAdd/bookAdd"
 
 import libraryService from "../../repository/libraryRepository";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom/dist'
 import libraryRepository from "../../repository/libraryRepository";
+import BookEdit from "../Books/bookEdit/bookEdit";
 
 
 class App extends Component
@@ -19,7 +19,8 @@ class App extends Component
         this.state = {
             books: [],
             categories: [],
-            authors: []
+            authors: [],
+            selectedBook: {}
         }
     }
 
@@ -33,14 +34,18 @@ class App extends Component
                     <div>
                         <Routes>
 
+                            <Route path={"/books/edit/:id"} exact
+                                   element={<BookEdit categories={this.state.categories} authors={this.state.authors}
+                                                     onEditBook={this.editBook} book={this.state.selectedBook}/>}/>
+
                             <Route path={"/books/add"} exact
-                                   element={<BooksAdd categories={this.state.categories} authors={this.state.authors}
-                                            onAddBook={this.addBook}/>}/>
+                                   element={<BookAdd categories={this.state.categories} authors={this.state.authors}
+                                                     onAddBook={this.addBook}/>}/>
 
 
                             <Route path={"/books"} exact
                                    element={<Books books={this.state.books} onDelete={this.deleteBook}
-                                                   onRent={this.rentBook}
+                                                   onRent={this.rentBook} onEdit={this.getBook}
                                    />}/>
 
                             <Route path={"/categories"} exact
@@ -106,12 +111,22 @@ class App extends Component
             });
     }
 
-    editProduct = (id, name, category, author, availableCopies) => {
+    editBook = (id, name, category, author, availableCopies) => {
         libraryRepository.editBook(id, name, category, author, availableCopies)
             .then(() => {
                 this.loadBooks();
             });
     }
+
+    getBook = (id) => {
+        libraryService.getBook(id)
+            .then((data) => {
+                this.setState({
+                    selectedBook: data.data
+                })
+            })
+    }
+
 
 
 

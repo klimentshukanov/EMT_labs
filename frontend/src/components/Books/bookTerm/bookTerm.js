@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 const BookTerm = (props) => {
 
@@ -10,7 +11,12 @@ const BookTerm = (props) => {
             <td>{props.term.category}</td>
             <td>{props.term.availableCopies}</td>
             <td>
-                <a title={"Delete"} className={"btn btn-danger"}
+
+                <Link className={"btn btn-danger"}
+                   onClick={() => props.onEdit(props.term.id)} to={`/books/edit/${props.term.id}`}
+                >Edit</Link>
+
+                <a style={{marginLeft: 5}} title={"Delete"} className={"btn btn-danger"}
                     onClick={() => props.onDelete(props.term.id)}
                 >Delete</a>
 

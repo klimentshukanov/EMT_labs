@@ -37,7 +37,12 @@ const libraryService = {
             "author": author,
             "availableCopies": availableCopies
         });
+    },
+
+    getBook: (id) => {
+        return axios.get(`/books/${id}`);
     }
+
 
 
 }
