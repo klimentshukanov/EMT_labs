@@ -31,9 +31,9 @@ class App extends Component
                         <Routes>
 
                             <Route path={"/"} exact
-                                   element={<Books books={this.state.books} onDelete={this.deleteBook}/>}/>
-                            <Route path={"/books"} exact
-                                   element={<Books books={this.state.books} onDelete={this.deleteBook}/>}/>
+                                   element={<Books books={this.state.books} onDelete={this.deleteBook}
+                                                   onRent={this.rentBook}
+                                   />}/>
 
                             <Route path={"/categories"} exact
                                    element={<Categories categories={this.state.categories}/>}/>
@@ -70,6 +70,13 @@ class App extends Component
 
     deleteBook = (id) => {
         libraryService.deleteBook(id)
+            .then(() => {
+                this.loadBooks();
+            });
+    }
+
+    rentBook = (id) => {
+        libraryService.markBookAsRented(id)
             .then(() => {
                 this.loadBooks();
             });

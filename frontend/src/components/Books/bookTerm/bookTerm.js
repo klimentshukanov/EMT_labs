@@ -13,6 +13,10 @@ const BookTerm = (props) => {
                 <a title={"Delete"} className={"btn btn-danger"}
                     onClick={() => props.onDelete(props.term.id)}
                 >Delete</a>
+
+                <a title={"Rent Book"} className={"btn btn-danger"}
+                   onClick={() => props.onRent(props.term.id)}
+                >Rent Book</a>
             </td>
         </tr>
 

@@ -12,6 +12,10 @@ const libraryService = {
 
     deleteBook: (id) => {
         return axios.delete(`/books/delete/${id}`);
+    },
+
+    markBookAsRented: (id) => {
+        return axios.put(`/books/rent/${id}`);
     }
 
 }
