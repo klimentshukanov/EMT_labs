@@ -74,7 +74,7 @@ class Books extends React.Component
         console.log(offset, nextPageOffset)
         return this.props.books.map((term, index) => {
             return (
-                <BookTerm term={term} onDelete={this.props.onDelete} onEdit={this.props.onEdit}/>
+                <BookTerm term={term} onDelete={this.props.onDelete} onEdit={this.props.onEdit} onRent={this.props.onRent}/>
             );
         }).filter((product, index) => {
             return index >= offset && index < nextPageOffset;
