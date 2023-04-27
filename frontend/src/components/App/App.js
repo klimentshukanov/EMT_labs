@@ -52,6 +52,10 @@ class App extends Component
                                    element={<Categories categories={this.state.categories}/>}/>
 
 
+                            <Route path={"/"} exact
+                                   element={<Books books={this.state.books} onDelete={this.deleteBook}
+                                                   onRent={this.rentBook} onEdit={this.getBook}
+                                   />}/>
 
                         </Routes>
                     </div>
