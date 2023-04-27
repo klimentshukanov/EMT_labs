@@ -1,5 +1,8 @@
 import React from "react";
 import BookTerm from "../bookTerm/bookTerm"
+import {Link} from 'react-router-dom';
+
+
 
 const books = (props) => {
 
@@ -25,6 +28,14 @@ const books = (props) => {
                         </tbody>
                     </table>
                 </div>
+                <div className="col mb-3">
+                    <div className="row">
+                        <div className="col-sm-12 col-md-12">
+                            <Link className={"btn btn-block btn-dark"} to={"/books/add"}>Add new book</Link>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 

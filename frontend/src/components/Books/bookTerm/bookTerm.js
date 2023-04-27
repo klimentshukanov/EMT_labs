@@ -14,9 +14,9 @@ const BookTerm = (props) => {
                     onClick={() => props.onDelete(props.term.id)}
                 >Delete</a>
 
-                <a title={"Rent Book"} className={"btn btn-danger"}
+                <a style={{marginLeft: 5}} title={"Mark as Taken"} className={"btn btn-danger"}
                    onClick={() => props.onRent(props.term.id)}
-                >Rent Book</a>
+                >Mark as Taken</a>
             </td>
         </tr>
 

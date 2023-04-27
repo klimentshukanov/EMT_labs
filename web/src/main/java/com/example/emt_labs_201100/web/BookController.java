@@ -1,8 +1,10 @@
 package com.example.emt_labs_201100.web;
 
+import com.example.emt_labs_201100.model.Author;
 import com.example.emt_labs_201100.model.Book;
 import com.example.emt_labs_201100.model.dto.BookDto;
 import com.example.emt_labs_201100.model.enums.Category;
+import com.example.emt_labs_201100.service.AuthorService;
 import com.example.emt_labs_201100.service.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,7 @@ public class BookController {
     {
         return bookService.listAll();
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Book> findBookById(@PathVariable Long id)

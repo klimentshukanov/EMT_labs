@@ -4,9 +4,11 @@ import React, {Component} from "react";
 import Books from "../Books/bookList/books"
 import Header from "../Header/header"
 import Categories from "../Categories/categories"
+import BooksAdd from "../Books/booksAdd/booksAdd"
 
 import libraryService from "../../repository/libraryRepository";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom/dist'
+import libraryRepository from "../../repository/libraryRepository";
 
 
 class App extends Component
@@ -16,7 +18,8 @@ class App extends Component
         super(props);
         this.state = {
             books: [],
-            categories: []
+            categories: [],
+            authors: []
         }
     }
 
@@ -30,7 +33,12 @@ class App extends Component
                     <div>
                         <Routes>
 
-                            <Route path={"/"} exact
+                            <Route path={"/books/add"} exact
+                                   element={<BooksAdd categories={this.state.categories} authors={this.state.authors}
+                                            onAddBook={this.addBook}/>}/>
+
+
+                            <Route path={"/books"} exact
                                    element={<Books books={this.state.books} onDelete={this.deleteBook}
                                                    onRent={this.rentBook}
                                    />}/>
@@ -59,6 +67,15 @@ class App extends Component
             });
     }
 
+    loadAuthors = () => {
+        libraryService.fetchAuthors()
+            .then((data) => {
+                this.setState({
+                    authors: data.data
+                })
+            });
+    }
+
     loadCategories = () => {
         libraryService.fetchCategories()
             .then((data) => {
@@ -82,10 +99,26 @@ class App extends Component
             });
     }
 
+    addBook = (name, category, author, availableCopies) => {
+        libraryService.addBook(name, category, author, availableCopies)
+            .then(() => {
+                this.loadBooks();
+            });
+    }
+
+    editProduct = (id, name, category, author, availableCopies) => {
+        libraryRepository.editBook(id, name, category, author, availableCopies)
+            .then(() => {
+                this.loadBooks();
+            });
+    }
+
+
 
     componentDidMount() {
         this.loadBooks();
         this.loadCategories();
+        this.loadAuthors();
     }
 
 }

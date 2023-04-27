@@ -6,6 +6,10 @@ const libraryService = {
         return axios.get("/books");
     },
 
+    fetchAuthors: () => {
+        return axios.get("/authors");
+    },
+
     fetchCategories: () => {
         return axios.get("/categories");
     },
@@ -16,7 +20,25 @@ const libraryService = {
 
     markBookAsRented: (id) => {
         return axios.put(`/books/rent/${id}`);
+    },
+
+    addBook: (name, category, author, availableCopies) => {
+        return axios.post("/books/save", {
+            "name": name,
+            "category": category,
+            "author": author,
+            "availableCopies": availableCopies
+        });
+    },
+    editBook: (id, name, category, author, availableCopies) => {
+        return axios.put(`/books/edit/${id}`, {
+            "name": name,
+            "category": category,
+            "author": author,
+            "availableCopies": availableCopies
+        });
     }
+
 
 }
 
